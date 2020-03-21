@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"notes.liyubing.net","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Window Live Writer （简称 WLW）是微软发布的一款免费的博客客户端写作、发布软件。Window Live Writer 支持各种主流的博客软件，比如 WordPress ，只要你的博客程序支持 xmlrpc 协议。不过在使用 Live Writer 发表日志的时候，偶尔会遇到一些错误，其中最常见错误就是 xmlrpc 错误，“服务器响应无效”。今天我们来给大家介绍一下这个问题以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Window Live Writer 发布日志遭遇 xmlrpc 错误的解决方案">
+<meta property="og:url" content="http://notes.liyubing.net/posts/20a1e34f.html">
+<meta property="og:site_name" content="Li Yubing&#39;s Notes">
+<meta property="og:description" content="Window Live Writer （简称 WLW）是微软发布的一款免费的博客客户端写作、发布软件。Window Live Writer 支持各种主流的博客软件，比如 WordPress ，只要你的博客程序支持 xmlrpc 协议。不过在使用 Live Writer 发表日志的时候，偶尔会遇到一些错误，其中最常见错误就是 xmlrpc 错误，“服务器响应无效”。今天我们来给大家介绍一下这个问题以">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-04-22T08:21:26.000Z">
+<meta property="article:modified_time" content="2016-04-22T08:21:26.000Z">
+<meta property="article:author" content="Li Yubing">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="wordpress">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://notes.liyubing.net/posts/20a1e34f.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Window Live Writer 发布日志遭遇 xmlrpc 错误的解决方案 | Li Yubing's Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Li Yubing's Notes" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Li Yubing's Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记个笔记，仅此而已</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">52</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">15</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://notes.liyubing.net/posts/20a1e34f.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Li Yubing">
+      <meta itemprop="description" content="不积跬步，无以至千里。不积小流，无以成江海。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Li Yubing's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Window Live Writer 发布日志遭遇 xmlrpc 错误的解决方案
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-04-22 16:21:26" itemprop="dateCreated datePublished" datetime="2016-04-22T16:21:26+08:00">2016-04-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Window Live Writer （简称 WLW）是微软发布的一款免费的博客客户端写作、发布软件。Window Live Writer 支持各种主流的博客软件，比如 <a href="https://wordpress.org/">WordPress</a> ，只要你的博客程序支持 <a href="http://www.xmlrpc.com/">xmlrpc</a> 协议。不过在使用 Live Writer 发表日志的时候，偶尔会遇到一些错误，其中最常见错误就是 xmlrpc 错误，“服务器响应无效”。今天我们来给大家介绍一下这个问题以及相应的处理办法。</p>
+<p>使用 Window Live Writer 发布博客到 WordPress ，最经常遇到 xmlrpc 错误是这样的：<br>Invalid Server Response<br>The response to the metaWeblog.newMediaObject method received from the weblog server was invalid:<br>Invalid response document returned from XmlRpc server<br>倘若你使用的是中文版的 Window Live Writer ，则是这样的：<br>服务器响应无效<br>从日志服务器接收的对 metaWeblog.newMediaObject method 方法的响应无效：<br>Invalid response document returned from XmlRpc server</p>
+<p>即使在 WordPress 官方论坛上，我们也遇到很多 WordPress 遭遇同样的问题；而对于这一问题，并没有确定的原因和解决方案。我们这里将我们所了解的办法，给大家介绍一下，希望能对你有所帮助。</p>
+<p><strong>常见的四种情况</strong><br>1.这可能是由于 PHP 版本所引起的问题。解决办法：打开 xmlrpc.php 文件(在wordpress的主目录下)，添加如下代码到文件的顶部，</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> 之后： </span><br><span class="line">$HTTP_RAW_POST_DATA = file_get_contents(“php:<span class="comment">//input”);</span></span><br></pre></td></tr></table></figure>
+<p>2.也可能是由于 .htaccess 规则错误所引起的。解决办法：将如下代码复制到 .htaccess 文件：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Files xmlrpc.php&gt; </span><br><span class="line">    SecFilterInheritance Off </span><br><span class="line">&lt;/Files&gt;</span><br></pre></td></tr></table></figure>
+<p>3.还有可能是由于 WLW 与某个已经安装启用的 WordPress 插件冲突。解决方案：禁用所有的 WordPress 插件，然后逐一启用，可找出具体的插件。 WordPress 论坛有位网友曾经遇到过 Window Live Writer 与 WordPress Super Cache 插件冲突的情况，下载新的版本即可解决；还有一个网友是因为 Window Live Writer 与插件 NextGEN 冲突，禁用此插件即可。 因此，如果你遇到 xmlrpc 错误，可以考虑一下是不是最近增加或者修改过某个WordPress插件。<br>4.xmlrpc.php 文件中增加了一些代码，调用到一些函数无法执行。解决方案：这个稍微困难一些，你可以使用 Fiddler 来监测 WLW 和你的主机之间的流量，查看都调用了哪些函数，然后找出原因。有个网友在使用 Live Writer 上传图片过程中，由于使用的ftp客户端软件将上传的文件名强制修改为小写，也遇到了同样的问题，最后通过这个办法找到了原因。</p>
+<p>以上四个是解决 Live Writer 的”Invalid server response”错误的常用的办法。<br><strong>路径错误也会造成同样的问题</strong></p>
+<p>主机迁移之后，图片上传文件的路径不一样造成的；因此只要所撰写的博客里有图片，就会遇到 Invalid Server Response 。</p>
+<p>在 WordPress 的后台，有个“选项”-&gt;“杂项”，其中有一项是用来设置 WordPress 上传目录，你以后通过 WordPress 直接上传的文件，包括使用 Live Writer 写博客的时候，所上传的图片等附件也直接上传到以上目录中。</p>
+<p>默认情况下，WordPress 的上传目录是 wordpress/wp-content/uploads/ 文件夹。但是，WordPress 所记住的并不是相对目录，而是根据服务器不同而生成的服务器上的绝对目录。</p>
+<p>比如说，当你的网站在 A 服务器上安装的时候，这个目录有可能是：<br>/home/username/public_html/wordpress/wp-content/uploads/<br>而到了 B 服务器上之后，即便是 username 完全一致，也有可能变成了：<br>/home2/username/public_html/wordpress/wp-content/uploads/</p>
+<p>只是一个数字之差，但目录错误，WordPress 就找不到对应的目录，无法上传图片和其他文件，也会引发同样的 xmlrpc 错误。</p>
+<p>即使在不更换服务器的情况下，如果你修改了 wordpress 的安装目录，也会引发同样的问题，在这里我们提醒 WordPress 用户务必注意这一点。</p>
+<p>针对这一情况，你只需要在 WordPress 的“后台”-&gt;“选项”-&gt;“杂项”中，输入正确的上传目录即可。假如你使用的 WordPress 默认的目录，那么直接删除这一项的内容，重新保留空白即可。</p>
+<p>参考自： <em><a href="http://wpchina.org/how-to-slove-wordpress-and-windows-live-writer-xmlrpc-server-problem-643/">Window Live Writer 发布日志遭遇 xmlrpc 错误的解决方案 | WordPress中文网</a></em></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/wordpress/" rel="tag"># wordpress</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/3529b04b.html" rel="prev" title="WordPress代码高亮插件：WP-Syntax">
+      <i class="fa fa-chevron-left"></i> WordPress代码高亮插件：WP-Syntax
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/8ac04967.html" rel="next" title="whmcs整合s-s教程">
+      whmcs整合s-s教程 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Li Yubing"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Li Yubing</p>
+  <div class="site-description" itemprop="description">不积跬步，无以至千里。不积小流，无以成江海。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:10341536@qq.com" title="E-Mail → mailto:10341536@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/ss_boom" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;ss_boom" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://macshuo.com/" title="http:&#x2F;&#x2F;macshuo.com&#x2F;" rel="noopener" target="_blank">MacTalk</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://ghostsf.com/" title="http:&#x2F;&#x2F;ghostsf.com&#x2F;" rel="noopener" target="_blank">ghostsf</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备19143655号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Li Yubing</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://notes.liyubing.net/posts/20a1e34f.html',]
+      });
+      });
+  </script>
+
+</body>
+</html>

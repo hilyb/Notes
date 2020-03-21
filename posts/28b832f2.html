@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"notes.liyubing.net","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="第一题： 购物单小明刚刚找到工作，老板人很好，只是老板夫人很爱购物。老板忙的时候经常让小明帮忙到商场代为购物。小明很厌烦，但又不好推辞。 这不，XX大促销又来了！老板夫人开出了长长的购物单，都是有打折优惠的。小明也有个怪癖，不到万不得已，从不刷卡，直接现金搞定。现在小明很心烦，请你帮他计算一下，需要从取款机上取多少现金，才能搞定这次购物。 取款机只能提供100元面额的纸币。小明想尽可能少取些现金，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第八届蓝桥杯C&#x2F;C++ 本B 省赛 第1题 购物单(结果填空)">
+<meta property="og:url" content="http://notes.liyubing.net/posts/28b832f2.html">
+<meta property="og:site_name" content="Li Yubing&#39;s Notes">
+<meta property="og:description" content="第一题： 购物单小明刚刚找到工作，老板人很好，只是老板夫人很爱购物。老板忙的时候经常让小明帮忙到商场代为购物。小明很厌烦，但又不好推辞。 这不，XX大促销又来了！老板夫人开出了长长的购物单，都是有打折优惠的。小明也有个怪癖，不到万不得已，从不刷卡，直接现金搞定。现在小明很心烦，请你帮他计算一下，需要从取款机上取多少现金，才能搞定这次购物。 取款机只能提供100元面额的纸币。小明想尽可能少取些现金，">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-03-08T09:58:42.000Z">
+<meta property="article:modified_time" content="2018-03-08T09:58:42.000Z">
+<meta property="article:author" content="Li Yubing">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://notes.liyubing.net/posts/28b832f2.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>第八届蓝桥杯C/C++ 本B 省赛 第1题 购物单(结果填空) | Li Yubing's Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Li Yubing's Notes" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Li Yubing's Notes</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记个笔记，仅此而已</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">52</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">15</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://notes.liyubing.net/posts/28b832f2.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Li Yubing">
+      <meta itemprop="description" content="不积跬步，无以至千里。不积小流，无以成江海。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Li Yubing's Notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第八届蓝桥杯C/C++ 本B 省赛 第1题 购物单(结果填空)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-08 17:58:42" itemprop="dateCreated datePublished" datetime="2018-03-08T17:58:42+08:00">2018-03-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="第一题：-购物单"><a href="#第一题：-购物单" class="headerlink" title="第一题： 购物单"></a>第一题： 购物单</h2><p>小明刚刚找到工作，老板人很好，只是老板夫人很爱购物。老板忙的时候经常让小明帮忙到商场代为购物。小明很厌烦，但又不好推辞。</p>
+<p>这不，XX大促销又来了！老板夫人开出了长长的购物单，都是有打折优惠的。<br>小明也有个怪癖，不到万不得已，从不刷卡，直接现金搞定。<br>现在小明很心烦，请你帮他计算一下，需要从取款机上取多少现金，才能搞定这次购物。</p>
+<p>取款机只能提供100元面额的纸币。小明想尽可能少取些现金，够用就行了。<br>你的任务是计算出，小明最少需要取多少现金。<br>以下是让人头疼的购物单，为了保护隐私，物品名称被隐藏了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">--------------------</span><br><span class="line">****     <span class="number">180.90</span>       <span class="number">88</span>折</span><br><span class="line">****      <span class="number">10.25</span>       <span class="number">65</span>折</span><br><span class="line">****      <span class="number">56.14</span>        <span class="number">9</span>折</span><br><span class="line">****     <span class="number">104.65</span>        <span class="number">9</span>折</span><br><span class="line">****     <span class="number">100.30</span>       <span class="number">88</span>折</span><br><span class="line">****     <span class="number">297.15</span>       半价</span><br><span class="line">****      <span class="number">26.75</span>       <span class="number">65</span>折</span><br><span class="line">****     <span class="number">130.62</span>       半价</span><br><span class="line">****     <span class="number">240.28</span>       <span class="number">58</span>折</span><br><span class="line">****     <span class="number">270.62</span>        <span class="number">8</span>折</span><br><span class="line">****     <span class="number">115.87</span>       <span class="number">88</span>折</span><br><span class="line">****     <span class="number">247.34</span>       <span class="number">95</span>折</span><br><span class="line">****      <span class="number">73.21</span>        <span class="number">9</span>折</span><br><span class="line">****     <span class="number">101.00</span>       半价</span><br><span class="line">****      <span class="number">79.54</span>       半价</span><br><span class="line">****     <span class="number">278.44</span>        <span class="number">7</span>折</span><br><span class="line">****     <span class="number">199.26</span>       半价</span><br><span class="line">****      <span class="number">12.97</span>        <span class="number">9</span>折</span><br><span class="line">****     <span class="number">166.30</span>       <span class="number">78</span>折</span><br><span class="line">****     <span class="number">125.50</span>       <span class="number">58</span>折</span><br><span class="line">****      <span class="number">84.98</span>        <span class="number">9</span>折</span><br><span class="line">****     <span class="number">113.35</span>       <span class="number">68</span>折</span><br><span class="line">****     <span class="number">166.57</span>       半价</span><br><span class="line">****      <span class="number">42.56</span>        <span class="number">9</span>折</span><br><span class="line">****      <span class="number">81.90</span>       <span class="number">95</span>折</span><br><span class="line">****     <span class="number">131.78</span>        <span class="number">8</span>折</span><br><span class="line">****     <span class="number">255.89</span>       <span class="number">78</span>折</span><br><span class="line">****     <span class="number">109.17</span>        <span class="number">9</span>折</span><br><span class="line">****     <span class="number">146.69</span>       <span class="number">68</span>折</span><br><span class="line">****     <span class="number">139.33</span>       <span class="number">65</span>折</span><br><span class="line">****     <span class="number">141.16</span>       <span class="number">78</span>折</span><br><span class="line">****     <span class="number">154.74</span>        <span class="number">8</span>折</span><br><span class="line">****      <span class="number">59.42</span>        <span class="number">8</span>折</span><br><span class="line">****      <span class="number">85.44</span>       <span class="number">68</span>折</span><br><span class="line">****     <span class="number">293.70</span>       <span class="number">88</span>折</span><br><span class="line">****     <span class="number">261.79</span>       <span class="number">65</span>折</span><br><span class="line">****      <span class="number">11.30</span>       <span class="number">88</span>折</span><br><span class="line">****     <span class="number">268.27</span>       <span class="number">58</span>折</span><br><span class="line">****     <span class="number">128.29</span>       <span class="number">88</span>折</span><br><span class="line">****     <span class="number">251.03</span>        <span class="number">8</span>折</span><br><span class="line">****     <span class="number">208.39</span>       <span class="number">75</span>折</span><br><span class="line">****     <span class="number">128.88</span>       <span class="number">75</span>折</span><br><span class="line">****      <span class="number">62.06</span>        <span class="number">9</span>折</span><br><span class="line">****     <span class="number">225.87</span>       <span class="number">75</span>折</span><br><span class="line">****      <span class="number">12.89</span>       <span class="number">75</span>折</span><br><span class="line">****      <span class="number">34.28</span>       <span class="number">75</span>折</span><br><span class="line">****      <span class="number">62.16</span>       <span class="number">58</span>折</span><br><span class="line">****     <span class="number">129.12</span>       半价</span><br><span class="line">****     <span class="number">218.37</span>       半价</span><br><span class="line">****     <span class="number">289.69</span>       <span class="number">8</span>折</span><br><span class="line">--------------------</span><br></pre></td></tr></table></figure>
+<p>需要说明的是，88折指的是按标价的88%计算，而8折是按80%计算，余者类推。<br>特别地，半价是按50%计算。</p>
+<p>请提交小明要从取款机上提取的金额，单位是元。<br>答案是一个整数，类似4300的样子，结尾必然是00，不要填写任何多余的内容。</p>
+<p>特别提醒：不许携带计算器入场，也不能打开手机。</p>
+<h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>第一次参加这比赛，第一道题就是这样，崩溃。个人最讨厌的就是这样的题目。<br>将清单复制到txt文本里面，利用Ctrl+H替换掉**这些字符和折扣，这里要注意8折和88折的区别，我刚开始本来是0.8替换成了0.08。预处理好数据之后用代码计算即可！注意类型不能为int</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">double</span> t;</span><br><span class="line">	t=<span class="number">180.90</span>*<span class="number">88</span>*<span class="number">0.01</span>+<span class="number">10.25</span>*<span class="number">65</span>*<span class="number">0.01</span>+<span class="number">56.14</span>*<span class="number">90</span>*<span class="number">0.01</span>+<span class="number">104.65</span>*<span class="number">90</span>*<span class="number">0.01</span>+<span class="number">100.30</span>*<span class="number">88</span>*<span class="number">0.01</span>+<span class="number">297.15</span>*<span class="number">0.5</span>+<span class="number">26.75</span>*<span class="number">65</span>*<span class="number">0.01</span>+<span class="number">130.62</span>*<span class="number">0.5</span>+<span class="number">240.28</span>*<span class="number">58</span>*<span class="number">0.01</span>+<span class="number">270.62</span>*<span class="number">80</span>*<span class="number">0.01</span>+<span class="number">115.87</span>*<span class="number">88</span>*<span class="number">0.01</span>+<span class="number">247.34</span>*<span class="number">95</span>*<span class="number">0.01</span>+<span class="number">73.21</span>*<span class="number">90</span>*<span class="number">0.01</span>+<span class="number">101.00</span>*<span class="number">0.5</span>+<span class="number">79.54</span>*<span class="number">0.5</span>+<span class="number">278.44</span>*<span class="number">70</span>*<span class="number">0.01</span>+<span class="number">199.26</span>*<span class="number">0.5</span>+<span class="number">12.97</span>*<span class="number">90</span>*<span class="number">0.01</span>+<span class="number">166.30</span>*<span class="number">78</span>*<span class="number">0.01</span>+<span class="number">125.50</span>*<span class="number">58</span>*<span class="number">0.01</span>+<span class="number">84.98</span>*<span class="number">90</span>*<span class="number">0.01</span>+<span class="number">113.35</span>*<span class="number">68</span>*<span class="number">0.01</span>+<span class="number">166.57</span>*<span class="number">0.5</span>+<span class="number">42.56</span>*<span class="number">90</span>*<span class="number">0.01</span>+<span class="number">81.90</span>*<span class="number">95</span>*<span class="number">0.01</span>+<span class="number">131.78</span>*<span class="number">80</span>*<span class="number">0.01</span>+<span class="number">255.89</span>*<span class="number">78</span>*<span class="number">0.01</span>+<span class="number">109.17</span>*<span class="number">90</span>*<span class="number">0.01</span>+<span class="number">146.69</span>*<span class="number">68</span>*<span class="number">0.01</span>+<span class="number">139.33</span>*<span class="number">65</span>*<span class="number">0.01</span>+<span class="number">141.16</span>*<span class="number">78</span>*<span class="number">0.01</span>+<span class="number">154.74</span>*<span class="number">80</span>*<span class="number">0.01</span>+<span class="number">59.42</span>*<span class="number">80</span>*<span class="number">0.01</span>+<span class="number">85.44</span>*<span class="number">68</span>*<span class="number">0.01</span>+<span class="number">293.70</span>*<span class="number">88</span>*<span class="number">0.01</span>+<span class="number">261.79</span>*<span class="number">65</span>*<span class="number">0.01</span>+<span class="number">11.30</span>*<span class="number">88</span>*<span class="number">0.01</span>+<span class="number">268.27</span>*<span class="number">58</span>*<span class="number">0.01</span>+<span class="number">128.29</span>*<span class="number">88</span>*<span class="number">0.01</span>+<span class="number">251.03</span>*<span class="number">80</span>*<span class="number">0.01</span>+<span class="number">208.39</span>*<span class="number">75</span>*<span class="number">0.01</span>+<span class="number">128.88</span>*<span class="number">75</span>*<span class="number">0.01</span>+<span class="number">62.06</span>*<span class="number">90</span>*<span class="number">0.01</span>+<span class="number">225.87</span>*<span class="number">75</span>*<span class="number">0.01</span>+<span class="number">12.89</span>*<span class="number">75</span>*<span class="number">0.01</span>+<span class="number">34.28</span>*<span class="number">75</span>*<span class="number">0.01</span>+<span class="number">62.16</span>*<span class="number">58</span>*<span class="number">0.01</span>+<span class="number">129.12</span>*<span class="number">0.5</span>+<span class="number">218.37</span>*<span class="number">0.5</span>+<span class="number">289.69</span>*<span class="number">80</span>*<span class="number">0.01</span>;</span><br><span class="line">	<span class="built_in">cout</span>&amp;lt;&amp;lt;t;	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>算出来是5136.86<br>答案：5200<br>当然我这是手动替换好的，</p>
+<p>网上的另一种解法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    freopen(<span class="string">"DATA.txt"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">    <span class="keyword">double</span> ans = <span class="number">0</span>,a,b;</span><br><span class="line">    <span class="keyword">char</span> buf[<span class="number">1110</span>];</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%s%lf%lf"</span>,buf,&amp;a,&amp;b)!=EOF)&#123;</span><br><span class="line">        ans += a*b/<span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lf\n"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//5136.859500</span></span><br><span class="line"><span class="comment">//5200</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/bf4c1352.html" rel="prev" title="[object Object]">
+      <i class="fa fa-chevron-left"></i> [object Object]
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/25b7f70d.html" rel="next" title="第八届蓝桥杯C/C++ 本B 省赛 第2题 等差素数列(结果填空)">
+      第八届蓝桥杯C/C++ 本B 省赛 第2题 等差素数列(结果填空) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一题：-购物单"><span class="nav-number">1.</span> <span class="nav-text">第一题： 购物单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题解："><span class="nav-number">1.1.</span> <span class="nav-text">题解：</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Li Yubing"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Li Yubing</p>
+  <div class="site-description" itemprop="description">不积跬步，无以至千里。不积小流，无以成江海。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:10341536@qq.com" title="E-Mail → mailto:10341536@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/ss_boom" title="Telegram → https:&#x2F;&#x2F;t.me&#x2F;ss_boom" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://macshuo.com/" title="http:&#x2F;&#x2F;macshuo.com&#x2F;" rel="noopener" target="_blank">MacTalk</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://ghostsf.com/" title="http:&#x2F;&#x2F;ghostsf.com&#x2F;" rel="noopener" target="_blank">ghostsf</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备19143655号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Li Yubing</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://notes.liyubing.net/posts/28b832f2.html',]
+      });
+      });
+  </script>
+
+</body>
+</html>
